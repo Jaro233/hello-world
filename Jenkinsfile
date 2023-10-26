@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy to Target Server') {
             steps {
                 script {
-                    sshagent(credentials: 'webserver-creds') {
+                    sshagent(credentials: ['webserver-creds']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@${env.TARGET_SERVER} 'docker pull ${env.IMAGE_NAME}'"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@${env.TARGET_SERVER} 'docker run -d -p 8080:8080 ${env.IMAGE_NAME}'"
                     }
