@@ -37,8 +37,8 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: [env.SSH_CREDENTIALS]) {
-                        sh "ssh ubuntu@${env.TARGET_SERVER} 'docker pull ${env.IMAGE_NAME}'"
-                        sh "ssh ubuntu@${env.TARGET_SERVER} 'docker run -d -p 8080:8080 ${env.IMAGE_NAME}'"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${env.TARGET_SERVER} 'docker pull ${env.IMAGE_NAME}'"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${env.TARGET_SERVER} 'docker run -d -p 8080:8080 ${env.IMAGE_NAME}'"
                     }
                 }
             }
