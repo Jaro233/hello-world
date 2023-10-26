@@ -26,9 +26,9 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('', env.DOCKER_HUB_CREDENTIALS) {
-                        docker.image(env.IMAGE_NAME).push()
-                    }
+                  withDockerRegistry(credentialsId: 'docker-login', toolName: 'docker'){   
+                      docker.image(env.IMAGE_NAME).push()
+                  }
                 }
             }
         }
